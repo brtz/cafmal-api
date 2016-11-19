@@ -12,6 +12,8 @@ gem 'oj_mimic_json'
 gem 'knock'
 # RBAC
 gem 'access-granted', '~> 1.1.0'
+# cross site origin
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
