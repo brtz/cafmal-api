@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sourcetype: 
+  address: MyString
+  port: 
+  protocol: MyString
+  username: MyString
+  password: MyString
+
+two:
+  sourcetype: 
+  address: MyString
+  port: 
+  protocol: MyString
+  username: MyString
+  password: MyString

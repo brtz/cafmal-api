@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :alerts
+  resources :alerters
+  resources :workers
+  resources :datasources
+  resources :checks
+  resources :teams
   resources :users
   resources :events
   post 'user_token' => 'user_token#create'

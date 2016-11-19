@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  alert_method: MyString
+  alert_address: MyString
+
+two:
+  name: MyString
+  alert_method: MyString
+  alert_address: MyString

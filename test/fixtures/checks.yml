@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: 
+  name: MyString
+  condition_query: MyString
+  condition_operand: 
+  condition_aggegrator: 
+  severity: 
+  interval: 
+  is_locked: false
+  last_ran_at: 2016-11-19 15:42:34
+
+two:
+  category: 
+  name: MyString
+  condition_query: MyString
+  condition_operand: 
+  condition_aggegrator: 
+  severity: 
+  interval: 
+  is_locked: false
+  last_ran_at: 2016-11-19 15:42:34

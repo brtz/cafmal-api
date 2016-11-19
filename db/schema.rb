@@ -10,9 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119014135) do
+ActiveRecord::Schema.define(version: 20161119171525) do
+
+  create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "uuid"
+    t.integer  "supported_targets"
+    t.datetime "heartbeat_received_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "alerts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "cooldown"
+    t.integer  "alert_method"
+    t.string   "alert_target"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.boolean  "is_active"
+    t.integer  "minimum_severity"
+  end
+
+  create_table "checks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "category"
+    t.string   "name"
+    t.string   "condition_query"
+    t.integer  "condition_operand"
+    t.integer  "condition_aggegrator"
+    t.integer  "severity"
+    t.integer  "interval"
+    t.boolean  "is_locked"
+    t.datetime "last_ran_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "datasources", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "sourcetype"
+    t.string   "address"
+    t.integer  "port"
+    t.string   "protocol"
+    t.string   "username"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "message"
+    t.integer  "kind"
+    t.integer  "severity"
+  end
+
+  create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -26,6 +78,18 @@ ActiveRecord::Schema.define(version: 20161119014135) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.integer  "role"
+    t.integer  "team_id"
+    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
+  create_table "workers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "uuid"
+    t.integer  "supported_sourcetype"
+    t.datetime "heartbeat_received_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_foreign_key "users", "teams"
 end

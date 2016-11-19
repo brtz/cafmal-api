@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uuid: MyString
+  supported_targets: 1
+  heartbeat_received_at: 2016-11-19 16:06:40
+
+two:
+  uuid: MyString
+  supported_targets: 1
+  heartbeat_received_at: 2016-11-19 16:06:40

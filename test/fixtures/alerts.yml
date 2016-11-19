@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cooldown: 1
+  alert_method: 1
+  alert_target: MyString
+
+two:
+  cooldown: 1
+  alert_method: 1
+  alert_target: MyString
