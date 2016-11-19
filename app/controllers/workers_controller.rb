@@ -3,6 +3,7 @@ class WorkersController < SecuredController
 
   # GET /workers
   def index
+    authorize! :read, Worker
     @workers = Worker.all
 
     render json: @workers
@@ -10,11 +11,13 @@ class WorkersController < SecuredController
 
   # GET /workers/1
   def show
+    authorize! :read, Worker
     render json: @worker
   end
 
   # POST /workers
   def create
+    authorize! :create, Worker
     @worker = Worker.new(worker_params)
 
     if @worker.save
@@ -26,6 +29,7 @@ class WorkersController < SecuredController
 
   # PATCH/PUT /workers/1
   def update
+    authorize! :update, Worker
     if @worker.update(worker_params)
       render json: @worker
     else
@@ -35,6 +39,7 @@ class WorkersController < SecuredController
 
   # DELETE /workers/1
   def destroy
+    authorize! :destroy, Worker
     @worker.destroy
   end
 

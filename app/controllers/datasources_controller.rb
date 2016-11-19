@@ -3,6 +3,7 @@ class DatasourcesController < SecuredController
 
   # GET /datasources
   def index
+    authorize! :read, Datasource
     @datasources = Datasource.all
 
     render json: @datasources
@@ -10,11 +11,13 @@ class DatasourcesController < SecuredController
 
   # GET /datasources/1
   def show
+    authorize! :read, Datasource
     render json: @datasource
   end
 
   # POST /datasources
   def create
+    authorize! :create, Datasource
     @datasource = Datasource.new(datasource_params)
 
     if @datasource.save
@@ -26,6 +29,7 @@ class DatasourcesController < SecuredController
 
   # PATCH/PUT /datasources/1
   def update
+    authorize! :update, Datasource
     if @datasource.update(datasource_params)
       render json: @datasource
     else
@@ -35,6 +39,7 @@ class DatasourcesController < SecuredController
 
   # DELETE /datasources/1
   def destroy
+    authorize! :destroy, Datasource
     @datasource.destroy
   end
 

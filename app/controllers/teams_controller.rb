@@ -3,6 +3,7 @@ class TeamsController < SecuredController
 
   # GET /teams
   def index
+    authorize! :read, Team
     @teams = Team.all
 
     render json: @teams
@@ -10,11 +11,13 @@ class TeamsController < SecuredController
 
   # GET /teams/1
   def show
+    authorize! :read, Team
     render json: @team
   end
 
   # POST /teams
   def create
+    authorize! :create, Team
     @team = Team.new(team_params)
 
     if @team.save
@@ -26,6 +29,7 @@ class TeamsController < SecuredController
 
   # PATCH/PUT /teams/1
   def update
+    authorize! :update, Team
     if @team.update(team_params)
       render json: @team
     else
@@ -35,6 +39,7 @@ class TeamsController < SecuredController
 
   # DELETE /teams/1
   def destroy
+    authorize! :destroy, Team
     @team.destroy
   end
 
@@ -46,6 +51,6 @@ class TeamsController < SecuredController
 
     # Only allow a trusted parameter "white list" through.
     def team_params
-      params.require(:team).permit(:name, :alert_method, :alert_address)
+      params.require(:team).permit(:name)
     end
 end

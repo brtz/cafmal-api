@@ -5,4 +5,20 @@ class User < ApplicationRecord
   belongs_to :team
 
   validates :email, uniqueness: true
+
+  def admin?
+    self.role == "admin"
+  end
+
+  def user?
+    self.role == "user"
+  end
+
+  def worker?
+    self.role == "worker"
+  end
+
+  def alerter?
+    self.role == "alerter"
+  end
 end

@@ -8,3 +8,5 @@
 
 t = Team.create(name: 'Admins')
 u = User.create(email: 'admin@example.com', password: 'cafmal', firstname: 'Otto', lastname: 'ottO', role: :admin, team: t)
+t = Team.create(name: 'Testusers')
+u = User.create(email: 'testuser@example.com', password: 'foobarbaz', firstname: 'Peter', lastname: 'Lustig', role: :user, team: t)

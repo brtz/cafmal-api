@@ -3,6 +3,7 @@ class AlertsController < ApplicationController
 
   # GET /alerts
   def index
+    authorize! :read, Alert
     @alerts = Alert.all
 
     render json: @alerts
@@ -10,11 +11,13 @@ class AlertsController < ApplicationController
 
   # GET /alerts/1
   def show
+    authorize! :read, Alert
     render json: @alert
   end
 
   # POST /alerts
   def create
+    authorize! :create, Alert
     @alert = Alert.new(alert_params)
 
     if @alert.save
@@ -26,6 +29,7 @@ class AlertsController < ApplicationController
 
   # PATCH/PUT /alerts/1
   def update
+    authorize! :update, Alert
     if @alert.update(alert_params)
       render json: @alert
     else
@@ -35,6 +39,7 @@ class AlertsController < ApplicationController
 
   # DELETE /alerts/1
   def destroy
+    authorize! :destroy, Alert
     @alert.destroy
   end
 

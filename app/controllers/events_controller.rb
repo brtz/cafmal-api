@@ -3,6 +3,7 @@ class EventsController < SecuredController
 
   # GET /events
   def index
+    authorize! :read, Event
     @events = Event.all
 
     render json: @events
@@ -10,11 +11,13 @@ class EventsController < SecuredController
 
   # GET /events/1
   def show
+    authorize! :read, Event
     render json: @event
   end
 
   # POST /events
   def create
+    authorize! :create, Event
     @event = Event.new(event_params)
 
     if @event.save
@@ -26,6 +29,7 @@ class EventsController < SecuredController
 
   # PATCH/PUT /events/1
   def update
+    authorize! :update, Event
     if @event.update(event_params)
       render json: @event
     else
@@ -35,6 +39,7 @@ class EventsController < SecuredController
 
   # DELETE /events/1
   def destroy
+    authorize! :destroy, Event
     @event.destroy
   end
 

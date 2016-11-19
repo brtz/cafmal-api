@@ -3,6 +3,7 @@ class AlertersController < SecuredController
 
   # GET /alerters
   def index
+    authorize! :read, Alerter
     @alerters = Alerter.all
 
     render json: @alerters
@@ -10,11 +11,13 @@ class AlertersController < SecuredController
 
   # GET /alerters/1
   def show
+    authorize! :read, Alerter
     render json: @alerter
   end
 
   # POST /alerters
   def create
+    authorize! :create, Alerter
     @alerter = Alerter.new(alerter_params)
 
     if @alerter.save
@@ -26,6 +29,7 @@ class AlertersController < SecuredController
 
   # PATCH/PUT /alerters/1
   def update
+    authorize! :update, Alerter
     if @alerter.update(alerter_params)
       render json: @alerter
     else
@@ -35,6 +39,7 @@ class AlertersController < SecuredController
 
   # DELETE /alerters/1
   def destroy
+    authorize! :destroy, Alerter
     @alerter.destroy
   end
 

@@ -3,6 +3,7 @@ class ChecksController < SecuredController
 
   # GET /checks
   def index
+    authorize! :read, Check
     @checks = Check.all
 
     render json: @checks
@@ -10,11 +11,13 @@ class ChecksController < SecuredController
 
   # GET /checks/1
   def show
+    authorize! :read, Check
     render json: @check
   end
 
   # POST /checks
   def create
+    authorize! :create, Check
     @check = Check.new(check_params)
 
     if @check.save
@@ -26,6 +29,7 @@ class ChecksController < SecuredController
 
   # PATCH/PUT /checks/1
   def update
+    authorize! :update, Check
     if @check.update(check_params)
       render json: @check
     else
@@ -35,6 +39,7 @@ class ChecksController < SecuredController
 
   # DELETE /checks/1
   def destroy
+    authorize! :destroy, Check
     @check.destroy
   end
 
