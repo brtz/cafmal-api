@@ -1,0 +1,5 @@
+class AddDatasourceToCheck < ActiveRecord::Migration[5.0]
+  def change
+    add_reference :checks, :datasource, foreign_key: true
+  end
+end

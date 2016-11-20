@@ -14,7 +14,7 @@ class AccessPolicy
     role :user, proc { |user| user.user? } do
       can :manage, Alert
       can :manage, Check
-      can :read, Event
+      can [:read, :create], Event
       can :update, User
     end
     role :worker, proc { |user| user.worker? } do

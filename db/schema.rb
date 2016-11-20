@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119171525) do
+ActiveRecord::Schema.define(version: 20161120005706) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20161119171525) do
     t.datetime "updated_at",       null: false
     t.boolean  "is_active"
     t.integer  "minimum_severity"
+    t.integer  "team_id"
+    t.index ["team_id"], name: "index_alerts_on_team_id", using: :btree
   end
 
   create_table "checks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -42,6 +44,10 @@ ActiveRecord::Schema.define(version: 20161119171525) do
     t.datetime "last_ran_at"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "team_id"
+    t.integer  "datasource_id"
+    t.index ["datasource_id"], name: "index_checks_on_datasource_id", using: :btree
+    t.index ["team_id"], name: "index_checks_on_team_id", using: :btree
   end
 
   create_table "datasources", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -62,6 +68,8 @@ ActiveRecord::Schema.define(version: 20161119171525) do
     t.string   "message"
     t.integer  "kind"
     t.integer  "severity"
+    t.integer  "team_id"
+    t.index ["team_id"], name: "index_events_on_team_id", using: :btree
   end
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -91,5 +99,9 @@ ActiveRecord::Schema.define(version: 20161119171525) do
     t.datetime "updated_at",            null: false
   end
 
+  add_foreign_key "alerts", "teams"
+  add_foreign_key "checks", "datasources"
+  add_foreign_key "checks", "teams"
+  add_foreign_key "events", "teams"
   add_foreign_key "users", "teams"
 end
