@@ -12,22 +12,34 @@ class AccessPolicy
       can :manage, Worker
     end
     role :user, proc { |user| user.user? } do
-      can :manage, Alert
-      can :manage, Check
+      can :manage, Alert do |alert, user|
+        alert.team_id == user.team_id
+      end
+      can :manage, Check do |check, user|
+        check.team_id == user.team_id
+      end
       can [:read, :create], Event
-      can :update, User
+      can [:read, :update], User do |user1, user2|
+        user1.id == user2.id
+      end
     end
     role :worker, proc { |user| user.worker? } do
       can [:read, :update], Check
       can :read, Datasource
-      can [:read, :create, :update], Event
+      can [:read, :create], Event
       can :manage, Worker
+      can [:read, :update], User do |user1, user2|
+        user1.id == user2.id
+      end
     end
     role :alerter, proc { |user| user.alerter? } do
       can :read, Alert
       can :manage, Alerter
       can [:read, :create, :update], Event
       can :read, Team
+      can [:read, :update], User do |user1, user2|
+        user1.id == user2.id
+      end
     end
   end
 end

@@ -40,7 +40,7 @@ class AlertersController < SecuredController
   # DELETE /alerters/1
   def destroy
     authorize! :destroy, Alerter
-    @alerter.destroy
+    @alerter.update_attributes(deleted_at: Time.now, uuid: 'deleted-' + @alerter.uuid)
   end
 
   private

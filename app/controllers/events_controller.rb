@@ -40,7 +40,7 @@ class EventsController < SecuredController
   # DELETE /events/1
   def destroy
     authorize! :destroy, Event
-    @event.destroy
+    @event.update_attribute(:deleted_at, Time.now)
   end
 
   private

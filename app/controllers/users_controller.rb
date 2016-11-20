@@ -40,7 +40,7 @@ class UsersController < SecuredController
   # DELETE /users/1
   def destroy
     authorize! :destroy, User
-    @user.destroy
+    @user.update_attributes(deleted_at: Time.now, email: 'deleted-' + @user.email)
   end
 
   private

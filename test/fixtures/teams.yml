@@ -2,10 +2,6 @@
 
 one:
   name: MyString
-  alert_method: MyString
-  alert_address: MyString
 
 two:
   name: MyString
-  alert_method: MyString
-  alert_address: MyString

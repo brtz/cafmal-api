@@ -40,7 +40,7 @@ class AlertsController < ApplicationController
   # DELETE /alerts/1
   def destroy
     authorize! :destroy, Alert
-    @alert.destroy
+    @alert.update_attribute(:deleted_at, Time.now)
   end
 
   private

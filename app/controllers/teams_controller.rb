@@ -40,7 +40,7 @@ class TeamsController < SecuredController
   # DELETE /teams/1
   def destroy
     authorize! :destroy, Team
-    @team.destroy
+    @team.update_attribute(:deleted_at, Time.now)
   end
 
   private

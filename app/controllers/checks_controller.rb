@@ -40,7 +40,7 @@ class ChecksController < SecuredController
   # DELETE /checks/1
   def destroy
     authorize! :destroy, Check
-    @check.destroy
+    @check.update_attribute(:deleted_at, Time.now)
   end
 
   private
