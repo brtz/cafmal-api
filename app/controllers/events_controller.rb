@@ -4,7 +4,13 @@ class EventsController < SecuredController
   # GET /events
   def index
     authorize! :read, Event
-    @events = Event.all
+
+    if params[:query].nil?
+      @events = Event.all
+    else
+      age_in_s = event_params_filter[:age].to_i
+      @events = Event.unscoped.where("created_at >= ?", Time.now.utc - age_in_s)
+    end
 
     render json: @events
   end
@@ -52,5 +58,9 @@ class EventsController < SecuredController
     # Only allow a trusted parameter "white list" through.
     def event_params
       params.require(:event).permit(:name, :message, :kind, :severity, :team_id)
+    end
+
+    def event_params_filter
+      params.require(:query).permit(:age)
     end
 end
