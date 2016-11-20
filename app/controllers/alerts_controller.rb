@@ -51,6 +51,6 @@ class AlertsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def alert_params
-      params.require(:alert).permit(:cooldown, :alert_method, :alert_target)
+      params.require(:alert).permit(:cooldown, :alert_method, :alert_target, :is_active, :minimum_severity, :team_id)
     end
 end
