@@ -1,3 +1,5 @@
+# DEVELOPMENT ONLY!
+# do not use this in production!
 version: '2'
 services:
   mariadb:
@@ -11,6 +13,9 @@ services:
       - "8080:8080"
     links:
       - "mariadb:mysql"
+    command: ["rails", "s", "-b", "0.0.0.0", "-p", "8080"]
+    volumes:
+      - "./:/cafmal-api"
     environment:
       - RACK_ENV=development
       - SECRET_KEY_BASE=bd43a0b6c77911978dfcf2d13b7467asdasdasd602c45abd612ebb2d8as9b7f8a244730def09a5c70573a3dbea6387248ec100aa2ae244730def0673707696f13e5e
