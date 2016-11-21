@@ -1,5 +1,7 @@
 # DEVELOPMENT ONLY!
 # do not use this in production!
+# changing files within the container will not restart the app
+# gem listen is the issue with containers
 version: '2'
 services:
   mariadb:
