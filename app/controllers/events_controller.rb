@@ -6,12 +6,12 @@ class EventsController < SecuredController
     authorize! :read, Event
 
     if params[:query].nil?
-      @events = Event.all
+      @events = Event.limited
     else
       query_age = Time.now.utc - event_params_filter[:age].to_i
       query_duration = Time.now.utc - (event_params_filter[:age].to_i - event_params_filter[:duration].to_i)
 
-      @events = Event.unscoped.where("created_at >= ? AND created_at <= ?", query_age, query_duration)
+      @events = Event.where("created_at >= ? AND created_at <= ?", query_age, query_duration)
     end
 
     render json: @events
