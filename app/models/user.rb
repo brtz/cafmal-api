@@ -26,6 +26,10 @@ class User < ApplicationRecord
     payload = {}
     payload['sub'] = self.id
     payload['role'] = self.role
+    payload['firstname'] = self.firstname
+    payload['lastname'] = self.lastname
+    payload['email'] = self.email
+    payload['team_id'] = self.team_id
     return payload
   end
 end

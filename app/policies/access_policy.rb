@@ -18,7 +18,10 @@ class AccessPolicy
       can :manage, Check do |check, user|
         check.team_id == user.team_id
       end
-      can [:read, :create], Event
+      can [:read, :create], Event do |event, user|
+        # @TODO this might be colliding with /events
+        event.team_id == user.team_id
+      end
       can [:read, :update], User do |user1, user2|
         user1.id == user2.id
       end
