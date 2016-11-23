@@ -21,4 +21,11 @@ class User < ApplicationRecord
   def alerter?
     self.role == "alerter"
   end
+
+  def to_token_payload
+    payload = {}
+    payload['sub'] = self.id
+    payload['role'] = self.role
+    return payload
+  end
 end
