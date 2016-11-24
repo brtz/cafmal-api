@@ -3,6 +3,9 @@ class SecuredController < ApplicationController
 
   def new
     classname = "#{params[:controller]}".singularize.camelize.constantize
-    render json: classname.attribute_names.map {|n| [n.to_sym,classname.type_for_attribute(n).type]}.to_h
+    fields = classname.attribute_names.map {|n| [n.to_sym,classname.type_for_attribute(n).type]}.to_h
+    fields = fields.except(:id, :created_at, :updated_at, :deleted_at)
+
+    render json: fields
   end
 end
