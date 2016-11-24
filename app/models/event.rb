@@ -6,4 +6,9 @@ class Event < ApplicationRecord
   enum kind: [:check, :alert, :login]
 
   belongs_to :team
+
+  validates :name, presence: true
+  validates :message, presence: true
+  validates :kind, presence: true
+  validates :severity, presence: true
 end

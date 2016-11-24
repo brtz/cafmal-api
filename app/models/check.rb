@@ -6,4 +6,14 @@ class Check < ApplicationRecord
 
   belongs_to :team
   belongs_to :datasource
+
+  validates :category, presence: true
+  validates :name, presence: true
+  validates :condition_query, presence: true
+  validates :condition_operand, presence: true
+  validates :condition_aggregator, presence: true
+  validates :severity, presence: true
+  validates :interval, presence: true
+  validates :is_locked, presence: true
+  validates :last_ran_at, presence: true
 end

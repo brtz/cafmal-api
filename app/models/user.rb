@@ -5,6 +5,10 @@ class User < ApplicationRecord
   belongs_to :team
 
   validates :email, uniqueness: true
+  validates :email, presence: true
+  validates :firstname, presence: true
+  validates :lastname, presence: true
+  validates :role, presence: true
 
   def admin?
     self.role == "admin"
