@@ -14,6 +14,4 @@ class Check < ApplicationRecord
   validates :condition_aggregator, presence: true
   validates :severity, presence: true
   validates :interval, presence: true
-  validates :is_locked, presence: true
-  validates :last_ran_at, presence: true
 end

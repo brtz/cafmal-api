@@ -3,5 +3,4 @@ class Alerter < ApplicationRecord
 
   validates :uuid, uniqueness: true
   validates :supported_targets, presence: true
-  validates :heartbeat_received_at, presence: true
 end

@@ -8,5 +8,4 @@ class Alert < ApplicationRecord
   validates :alert_target, presence: true
   validates :is_enabled, presence: true
   validates :minimum_severity, presence: true
-  validates :is_silenced, presence: true
 end
