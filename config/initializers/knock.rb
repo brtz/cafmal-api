@@ -28,7 +28,7 @@ Knock.setup do |config|
   ## Configure the algorithm used to encode the token
   ##
   ## Default:
-  config.token_signature_algorithm = 'HS256'
+  config.token_signature_algorithm = 'ES256'
 
   ## Signature key
   ## -------------
@@ -37,6 +37,7 @@ Knock.setup do |config|
   ##
   ## Default:
   #config.token_secret_signature_key = -> { Rails.application.secrets.secret_key_base }
+  config.token_secret_signature_key = -> { OpenSSL::PKey::EC.new Rails.application.secrets.token_es256_priv }
 
   ## If using Auth0, uncomment the line below
   # config.token_secret_signature_key = -> { JWT.base64url_decode Rails.application.secrets.auth0_client_secret }
@@ -47,7 +48,9 @@ Knock.setup do |config|
   ## Configure the public key used to decode tokens, if required.
   ##
   ## Default:
-  #config.token_public_key = nil
+  pubkey = OpenSSL::PKey::EC.new Rails.application.secrets.token_es256_priv
+  pubkey.private_key = nil
+  config.token_public_key = pubkey
 
 
   ## Exception Class

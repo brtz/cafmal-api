@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124230810) do
+ActiveRecord::Schema.define(version: 20161126142314) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(version: 20161124230810) do
     t.integer  "interval"
     t.boolean  "is_locked"
     t.datetime "last_ran_at"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "team_id"
     t.integer  "datasource_id"
     t.datetime "deleted_at"
+    t.string   "documentation_url",    default: "http://"
     t.index ["datasource_id"], name: "index_checks_on_datasource_id", using: :btree
     t.index ["team_id"], name: "index_checks_on_team_id", using: :btree
   end
