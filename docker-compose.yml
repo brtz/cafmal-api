@@ -5,7 +5,7 @@
 version: '2'
 services:
   mariadb:
-    image: mariadb
+    image: mariadb:10
     environment:
       - MYSQL_ROOT_PASSWORD=narfz0rt
 

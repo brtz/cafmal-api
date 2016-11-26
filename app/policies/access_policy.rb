@@ -11,6 +11,7 @@ class AccessPolicy
       can :manage, User
       can :manage, Worker
     end
+
     role :user, proc { |user| user.user? } do
       can :manage, Alert do |alert, user|
         alert.team_id == user.team_id
@@ -26,6 +27,7 @@ class AccessPolicy
         user1.id == user2.id
       end
     end
+
     role :worker, proc { |user| user.worker? } do
       can [:read, :update], Check
       can :read, Datasource
@@ -35,6 +37,7 @@ class AccessPolicy
         user1.id == user2.id
       end
     end
+
     role :alerter, proc { |user| user.alerter? } do
       can :read, Alert
       can :manage, Alerter
@@ -44,5 +47,6 @@ class AccessPolicy
         user1.id == user2.id
       end
     end
+
   end
 end
