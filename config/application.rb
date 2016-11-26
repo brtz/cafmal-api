@@ -28,5 +28,15 @@ module CafmalApi
     config.api_only = true
     config.time_zone = 'UTC'
     config.active_record.default_timezone = :utc
+
+    config.cache_store = :redis_store, {
+      host: "redis" || ENV["CAFMAL-API_CACHE_HOST"],
+      port: 6379 || ENV["CAFMAL-API_CACHE_PORT"].to_i,
+      db: 0 || ENV["CAFMAL-API_CACHE_DB"].to_i,
+      password: "foobar" || ENV["CAFMAL-API_CACHE_PASSWORD"],
+      namespace: "cache"
+    }
+
+    config.middleware.use Rack::Attack
   end
 end

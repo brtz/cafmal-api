@@ -9,6 +9,10 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=narfz0rt
 
+  redis:
+    image: redis:3-alpine
+    comand: ["redis-server", "--requirepass", "foobar"]
+
   cafmal-api:
     build: .
     ports:
