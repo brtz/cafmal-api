@@ -11,14 +11,14 @@ class UsersController < SecuredController
 
   # GET /users/1
   def show
-    authorize! :read, User
+    authorize! :read, @user
     render json: @user
   end
 
   # POST /users
   def create
-    authorize! :create, User
     @user = User.new(user_params)
+    authorize! :create, @user
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -29,7 +29,7 @@ class UsersController < SecuredController
 
   # PATCH/PUT /users/1
   def update
-    authorize! :update, User
+    authorize! :update, @user
     if @user.update(user_params)
       render json: @user
     else
@@ -39,7 +39,7 @@ class UsersController < SecuredController
 
   # DELETE /users/1
   def destroy
-    authorize! :destroy, User
+    authorize! :destroy, @user
     @user.update_attributes(deleted_at: Time.now, email: 'deleted-' + @user.email)
   end
 

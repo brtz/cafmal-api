@@ -1,4 +1,6 @@
 class Check < ApplicationRecord
+  scope :limited_by_team, ->(team_id) { where("team_id >= ?",  team_id) }
+
   enum category: [:system, :application, :misc]
   enum condition_operand: [:lowerThan, :greaterThan]
   enum condition_aggregator: [:agg_sum, :agg_average, :agg_invalue, :agg_distinct]

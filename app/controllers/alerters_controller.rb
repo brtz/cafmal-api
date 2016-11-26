@@ -11,14 +11,14 @@ class AlertersController < SecuredController
 
   # GET /alerters/1
   def show
-    authorize! :read, Alerter
+    authorize! :read, @alerter
     render json: @alerter
   end
 
   # POST /alerters
   def create
-    authorize! :create, Alerter
     @alerter = Alerter.new(alerter_params)
+    authorize! :create, @alerter
 
     if @alerter.save
       render json: @alerter, status: :created, location: @alerter
@@ -29,7 +29,7 @@ class AlertersController < SecuredController
 
   # PATCH/PUT /alerters/1
   def update
-    authorize! :update, Alerter
+    authorize! :update, @alerter
     if @alerter.update(alerter_params)
       render json: @alerter
     else
@@ -39,7 +39,7 @@ class AlertersController < SecuredController
 
   # DELETE /alerters/1
   def destroy
-    authorize! :destroy, Alerter
+    authorize! :destroy, @alerter
     @alerter.update_attributes(deleted_at: Time.now, uuid: 'deleted-' + @alerter.uuid)
   end
 

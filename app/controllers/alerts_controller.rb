@@ -3,22 +3,25 @@ class AlertsController < SecuredController
 
   # GET /alerts
   def index
-    authorize! :read, Alert
-    @alerts = Alert.all
+    if current_user.admin?
+      @alerts = Alert.all
+    else
+      @alerts = Alert.limited_by_team(current_user.team_id)
+    end
 
     render json: @alerts
   end
 
   # GET /alerts/1
   def show
-    authorize! :read, Alert
+    authorize! :read, @alert
     render json: @alert
   end
 
   # POST /alerts
   def create
-    authorize! :create, Alert
     @alert = Alert.new(alert_params)
+    authorize! :create, @alert
 
     if @alert.save
       render json: @alert, status: :created, location: @alert
@@ -29,7 +32,7 @@ class AlertsController < SecuredController
 
   # PATCH/PUT /alerts/1
   def update
-    authorize! :update, Alert
+    authorize! :update, @alert
     if @alert.update(alert_params)
       render json: @alert
     else
@@ -39,7 +42,7 @@ class AlertsController < SecuredController
 
   # DELETE /alerts/1
   def destroy
-    authorize! :destroy, Alert
+    authorize! :destroy, @alert
     @alert.update_attribute(:deleted_at, Time.now)
   end
 

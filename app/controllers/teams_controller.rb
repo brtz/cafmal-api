@@ -11,14 +11,14 @@ class TeamsController < SecuredController
 
   # GET /teams/1
   def show
-    authorize! :read, Team
+    authorize! :read, @team
     render json: @team
   end
 
   # POST /teams
   def create
-    authorize! :create, Team
     @team = Team.new(team_params)
+    authorize! :create, @team
 
     if @team.save
       render json: @team, status: :created, location: @team
@@ -29,7 +29,7 @@ class TeamsController < SecuredController
 
   # PATCH/PUT /teams/1
   def update
-    authorize! :update, Team
+    authorize! :update, @team
     if @team.update(team_params)
       render json: @team
     else
@@ -39,7 +39,7 @@ class TeamsController < SecuredController
 
   # DELETE /teams/1
   def destroy
-    authorize! :destroy, Team
+    authorize! :destroy, @team
     @team.update_attribute(:deleted_at, Time.now)
   end
 

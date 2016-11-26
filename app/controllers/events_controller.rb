@@ -6,12 +6,23 @@ class EventsController < SecuredController
     authorize! :read, Event
 
     if params[:query].nil?
-      @events = Event.limited
+
+      if current_user.admin?
+        @events = Event.limited_by_age
+      else
+        @events = Event.limited_by_team(current_user.team_id).limited_by_age
+      end
+
     else
       query_age = Time.now.utc - event_params_filter[:age].to_i
       query_duration = Time.now.utc - (event_params_filter[:age].to_i - event_params_filter[:duration].to_i)
 
-      @events = Event.where("created_at >= ? AND created_at <= ?", query_age, query_duration)
+      if current_user.admin?
+        @events = Event.where("created_at >= ? AND created_at <= ?", query_age, query_duration)
+      else
+        @events = Event.where("created_at >= ? AND created_at <= ? AND team_id = ?", query_age, query_duration, current_user.team_id)
+      end
+
     end
 
     render json: @events
@@ -19,14 +30,14 @@ class EventsController < SecuredController
 
   # GET /events/1
   def show
-    authorize! :read, Event
+    authorize! :read, @event
     render json: @event
   end
 
   # POST /events
   def create
-    authorize! :create, Event
     @event = Event.new(event_params)
+    authorize! :create,  @event
 
     if @event.save
       render json: @event, status: :created, location: @event
@@ -37,7 +48,7 @@ class EventsController < SecuredController
 
   # PATCH/PUT /events/1
   def update
-    authorize! :update, Event
+    authorize! :update,  @event
     if @event.update(event_params)
       render json: @event
     else
@@ -47,7 +58,7 @@ class EventsController < SecuredController
 
   # DELETE /events/1
   def destroy
-    authorize! :destroy, Event
+    authorize! :destroy,  @event
     @event.update_attribute(:deleted_at, Time.now)
   end
 

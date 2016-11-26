@@ -3,22 +3,25 @@ class ChecksController < SecuredController
 
   # GET /checks
   def index
-    authorize! :read, Check
-    @checks = Check.all
+    if current_user.admin?
+      @checks = Check.all
+    else
+      @checks = Check.limited_by_team(current_user.team_id)
+    end
 
     render json: @checks
   end
 
   # GET /checks/1
   def show
-    authorize! :read, Check
+    authorize! :read, @check
     render json: @check
   end
 
   # POST /checks
   def create
-    authorize! :create, Check
     @check = Check.new(check_params)
+    authorize! :create, @check
 
     if @check.save
       render json: @check, status: :created, location: @check
@@ -29,7 +32,7 @@ class ChecksController < SecuredController
 
   # PATCH/PUT /checks/1
   def update
-    authorize! :update, Check
+    authorize! :update, @check
     if @check.update(check_params)
       render json: @check
     else
@@ -39,7 +42,7 @@ class ChecksController < SecuredController
 
   # DELETE /checks/1
   def destroy
-    authorize! :destroy, Check
+    authorize! :destroy, @check
     @check.update_attribute(:deleted_at, Time.now)
   end
 

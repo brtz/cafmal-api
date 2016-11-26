@@ -11,14 +11,14 @@ class WorkersController < SecuredController
 
   # GET /workers/1
   def show
-    authorize! :read, Worker
+    authorize! :read, @worker
     render json: @worker
   end
 
   # POST /workers
   def create
-    authorize! :create, Worker
     @worker = Worker.new(worker_params)
+    authorize! :create, @worker
 
     if @worker.save
       render json: @worker, status: :created, location: @worker
@@ -29,7 +29,7 @@ class WorkersController < SecuredController
 
   # PATCH/PUT /workers/1
   def update
-    authorize! :update, Worker
+    authorize! :update, @worker
     if @worker.update(worker_params)
       render json: @worker
     else
@@ -39,7 +39,7 @@ class WorkersController < SecuredController
 
   # DELETE /workers/1
   def destroy
-    authorize! :destroy, Worker
+    authorize! :destroy, @worker
     @worker.update_attributes(deleted_at: Time.now, uuid: 'deleted-' + @worker.uuid)
   end
 
