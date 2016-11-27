@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126142314) do
+ActiveRecord::Schema.define(version: 20161127144830) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20161126142314) do
     t.string   "name"
     t.string   "condition_query"
     t.integer  "condition_operand"
-    t.integer  "condition_aggegrator"
+    t.integer  "condition_aggregator"
     t.integer  "severity"
     t.integer  "interval"
     t.boolean  "is_locked"

@@ -54,6 +54,6 @@ class ChecksController < SecuredController
 
     # Only allow a trusted parameter "white list" through.
     def check_params
-      params.require(:check).permit(:category, :name, :condition_query, :condition_operand, :condition_aggegrator, :severity, :interval, :is_locked, :last_ran_at, :team_id, :datasource_id, :documentation_url)
+      params.require(:check).permit(:category, :name, :condition_query, :condition_operand, :condition_aggregator, :severity, :interval, :is_locked, :last_ran_at, :team_id, :datasource_id, :documentation_url)
     end
 end

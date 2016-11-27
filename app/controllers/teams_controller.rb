@@ -41,6 +41,8 @@ class TeamsController < SecuredController
   def destroy
     authorize! :destroy, @team
     @team.update_attribute(:deleted_at, Time.now)
+
+    # @TODO team deletion results in checks, alerts & users being deleted
   end
 
   private
