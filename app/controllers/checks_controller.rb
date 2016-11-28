@@ -3,7 +3,7 @@ class ChecksController < SecuredController
 
   # GET /checks
   def index
-    if current_user.admin?
+    if current_user.admin? || current_user.worker?
       @checks = Check.all
     else
       @checks = Check.limited_by_team(current_user.team_id)
@@ -54,6 +54,6 @@ class ChecksController < SecuredController
 
     # Only allow a trusted parameter "white list" through.
     def check_params
-      params.require(:check).permit(:category, :name, :condition_query, :condition_operand, :condition_aggregator, :severity, :interval, :is_locked, :last_ran_at, :team_id, :datasource_id, :documentation_url)
+      params.require(:check).permit(:category, :name, :condition_query, :condition_operand, :condition_aggregator, :condition_value, :severity, :interval, :is_locked, :last_ran_at, :team_id, :datasource_id, :documentation_url)
     end
 end
