@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161127181807) do
+ActiveRecord::Schema.define(version: 20161128230404) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -38,19 +38,19 @@ ActiveRecord::Schema.define(version: 20161127181807) do
   create_table "checks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "category"
     t.string   "name"
-    t.string   "condition_query"
-    t.integer  "condition_operand"
+    t.text     "condition_query",      limit: 65535
+    t.integer  "condition_operator"
     t.integer  "condition_aggregator"
     t.integer  "severity"
     t.integer  "interval"
     t.boolean  "is_locked"
     t.datetime "last_ran_at"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.integer  "team_id"
     t.integer  "datasource_id"
     t.datetime "deleted_at"
-    t.string   "documentation_url",               default: "http://"
+    t.string   "documentation_url",                  default: "http://"
     t.float    "condition_value",      limit: 24
     t.index ["datasource_id"], name: "index_checks_on_datasource_id", using: :btree
     t.index ["team_id"], name: "index_checks_on_team_id", using: :btree
