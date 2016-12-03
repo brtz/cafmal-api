@@ -51,6 +51,6 @@ class DatasourcesController < SecuredController
 
     # Only allow a trusted parameter "white list" through.
     def datasource_params
-      params.require(:datasource).permit(:sourcetype, :address, :port, :protocol, :username, :password, :index)
+      params.require(:datasource).permit(:sourcetype, :address, :port, :protocol, :username, :password)
     end
 end

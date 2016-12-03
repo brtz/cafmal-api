@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128230404) do
+ActiveRecord::Schema.define(version: 20161203182841) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -44,14 +44,15 @@ ActiveRecord::Schema.define(version: 20161128230404) do
     t.integer  "severity"
     t.integer  "interval"
     t.boolean  "is_locked"
-    t.datetime "last_ran_at"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "last_ran_at",                        default: '2016-11-29 23:34:42'
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
     t.integer  "team_id"
     t.integer  "datasource_id"
     t.datetime "deleted_at"
     t.string   "documentation_url",                  default: "http://"
     t.float    "condition_value",      limit: 24
+    t.string   "index"
     t.index ["datasource_id"], name: "index_checks_on_datasource_id", using: :btree
     t.index ["team_id"], name: "index_checks_on_team_id", using: :btree
   end
@@ -66,7 +67,6 @@ ActiveRecord::Schema.define(version: 20161128230404) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.string   "index"
   end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20161128230404) do
     t.integer  "severity"
     t.integer  "team_id"
     t.datetime "deleted_at"
+    t.string   "metric"
     t.index ["team_id"], name: "index_events_on_team_id", using: :btree
   end
 
@@ -103,7 +104,6 @@ ActiveRecord::Schema.define(version: 20161128230404) do
 
   create_table "workers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
-    t.integer  "supported_sourcetype"
     t.datetime "heartbeat_received_at"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
