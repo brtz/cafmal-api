@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203182841) do
+ActiveRecord::Schema.define(version: 20161204102551) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -25,13 +25,14 @@ ActiveRecord::Schema.define(version: 20161203182841) do
     t.integer  "cooldown"
     t.integer  "alert_method"
     t.string   "alert_target"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.boolean  "is_enabled"
     t.integer  "minimum_severity"
     t.integer  "team_id"
     t.datetime "deleted_at"
     t.boolean  "is_silenced"
+    t.string   "pattern",          default: "*"
     t.index ["team_id"], name: "index_alerts_on_team_id", using: :btree
   end
 
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 20161203182841) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string   "name"
   end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

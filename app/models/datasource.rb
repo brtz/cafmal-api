@@ -4,4 +4,5 @@ class Datasource < ApplicationRecord
 
   validates :sourcetype, presence: true
   validates :address, presence: true
+  validates :name, uniqueness: true
 end
