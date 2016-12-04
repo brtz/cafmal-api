@@ -40,7 +40,7 @@ class DatasourcesController < SecuredController
   # DELETE /datasources/1
   def destroy
     authorize! :destroy, @datasource
-    @datasource.update_attribute(:deleted_at, Time.now)
+    @datasource.update_attributes(deleted_at: Time.now, name: 'deleted-' + @datasource.name)
   end
 
   private

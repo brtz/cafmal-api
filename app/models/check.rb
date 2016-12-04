@@ -3,7 +3,7 @@ class Check < ApplicationRecord
 
   enum category: [:system, :application, :misc]
   enum condition_operator: [:lowerThan, :greaterThan, :lowerThanOrEqual, :greaterThanOrEqual, :equal, :notEqual]
-  enum condition_aggregator: [:elasticsearch_count]
+  enum condition_aggregator: [:elasticsearch_count, :influxdb_count, :influxdb_basic_all, :influxdb_basic_distinct]
   enum severity: [:info, :warning, :critical, :error]
 
   belongs_to :team
