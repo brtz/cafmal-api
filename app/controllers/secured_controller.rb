@@ -6,11 +6,9 @@ class SecuredController < ApplicationController
 
     fields = {}
     classname.attribute_names.map.each do |name|
-      attribute = nil
+      attribute = classname.type_for_attribute(name).type
       if classname.type_for_attribute(name).type.nil?
         attribute = classname.send(name.pluralize)
-      else
-        attribute = classname.type_for_attribute(name).type
       end
       fields[name.to_sym] = attribute
     end

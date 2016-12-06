@@ -1,3 +1,5 @@
+require 'digest'
+
 class User < ApplicationRecord
   has_secure_password
 
@@ -34,6 +36,7 @@ class User < ApplicationRecord
     payload['lastname'] = self.lastname
     payload['email'] = self.email
     payload['team_id'] = self.team_id
+    payload['hash'] = Digest::SHA256.base64digest self.updated_at.to_s
     return payload
   end
 end
