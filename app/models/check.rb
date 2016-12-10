@@ -1,5 +1,5 @@
 class Check < ApplicationRecord
-  scope :limited_by_team, ->(team_id) { where("team_id >= ?",  team_id) }
+  scope :limited_by_team, ->(team_id) { where("team_id = ?",  team_id) }
 
   enum category: [:system, :application, :network, :misc]
   enum condition_operator: [:lowerThan, :greaterThan, :lowerThanOrEqual, :greaterThanOrEqual, :equal, :notEqual]

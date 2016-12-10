@@ -3,6 +3,8 @@ require 'digest'
 class User < ApplicationRecord
   has_secure_password
 
+  scope :limited_by_team, ->(team_id) { where("team_id = ?",  team_id) }
+
   enum role: [:admin, :lead, :user, :worker, :alerter]
   belongs_to :team
 

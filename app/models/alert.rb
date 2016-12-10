@@ -1,5 +1,5 @@
 class Alert < ApplicationRecord
-  scope :limited_by_team, ->(team_id) { where("team_id >= ?",  team_id) }
+  scope :limited_by_team, ->(team_id) { where("team_id = ?",  team_id) }
 
   enum alert_method: [:email, :slack, :webhook, :jira_issue]
   enum minimum_severity: [:info, :warning, :critical, :error]

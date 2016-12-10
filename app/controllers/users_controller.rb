@@ -4,7 +4,11 @@ class UsersController < SecuredController
   # GET /users
   def index
     authorize! :read, User
-    @users = User.all
+    if current_user.admin?
+      @users = User.all
+    else
+      @users = User.limited_by_team(current_user.team_id)
+    end
 
     render json: @users
   end
