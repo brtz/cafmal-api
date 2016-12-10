@@ -51,6 +51,6 @@ class AlertersController < SecuredController
 
     # Only allow a trusted parameter "white list" through.
     def alerter_params
-      params.require(:alerter).permit(:uuid, :supported_targets, :heartbeat_received_at)
+      params.require(:alerter).permit(:uuid, :heartbeat_received_at)
     end
 end

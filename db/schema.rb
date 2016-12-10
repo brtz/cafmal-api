@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204102551) do
+ActiveRecord::Schema.define(version: 20161210181232) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
-    t.integer  "supported_targets"
     t.datetime "heartbeat_received_at"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false

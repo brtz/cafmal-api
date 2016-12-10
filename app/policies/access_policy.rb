@@ -12,6 +12,22 @@ class AccessPolicy
       can :manage, Worker
     end
 
+    role :lead, proc { |user| user.lead? } do
+      can :manage, Alert do |alert, user|
+        alert.team_id == user.team_id
+      end
+      can :manage, Check do |check, user|
+        check.team_id == user.team_id
+      end
+      can [:read], Datasource
+      can [:read, :create], Event do |event, user|
+        event.team_id == user.team_id
+      end
+      can [:read, :update], User do |user1, user2|
+        user1.team_id == user2.team_id
+      end
+    end
+
     role :user, proc { |user| user.user? } do
       can :manage, Alert do |alert, user|
         alert.team_id == user.team_id
@@ -21,7 +37,6 @@ class AccessPolicy
       end
       can [:read], Datasource
       can [:read, :create], Event do |event, user|
-        # @TODO this might be colliding with /events
         event.team_id == user.team_id
       end
       can [:read, :update], User do |user1, user2|

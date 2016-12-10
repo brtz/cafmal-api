@@ -3,7 +3,7 @@ require 'digest'
 class User < ApplicationRecord
   has_secure_password
 
-  enum role: [:admin, :user, :worker, :alerter]
+  enum role: [:admin, :lead, :user, :worker, :alerter]
   belongs_to :team
 
   validates :email, uniqueness: true
@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   def admin?
     self.role == "admin"
+  end
+
+  def lead?
+    self.role == "lead"
   end
 
   def user?

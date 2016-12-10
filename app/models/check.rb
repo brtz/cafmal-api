@@ -1,7 +1,7 @@
 class Check < ApplicationRecord
   scope :limited_by_team, ->(team_id) { where("team_id >= ?",  team_id) }
 
-  enum category: [:system, :application, :misc]
+  enum category: [:system, :application, :network, :misc]
   enum condition_operator: [:lowerThan, :greaterThan, :lowerThanOrEqual, :greaterThanOrEqual, :equal, :notEqual]
   enum condition_aggregator: [:elasticsearch_count, :influxdb_count, :influxdb_basic_all, :influxdb_basic_distinct]
   enum severity: [:info, :warning, :critical, :error]
