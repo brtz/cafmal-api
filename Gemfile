@@ -4,6 +4,7 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'redis-rails', '~> 5.0.1'
 gem 'unicorn'
+gem 'unicorn-worker-killer'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
