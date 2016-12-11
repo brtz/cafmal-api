@@ -23,7 +23,7 @@ u_alerter = User.create(email: 'alerter@example.com', password: 'barfoo', firstn
 
 # datesources
 d1 = Datasource.create(sourcetype: 'elasticsearch', address: 'elasticsearch', port: 9200, protocol: 'http://', name: 'my_es')
-d2 = Datasource.create(sourcetype: 'influxdb', address: 'influxdb', port: 8086, protocol: 'http://', name: 'my_innfluxdb', username: 'admin', password: 'blub')
+d2 = Datasource.create(sourcetype: 'influxdb', address: 'influxdb', port: 8086, protocol: 'http://', name: 'my_influxdb', username: 'admin', password: 'blub')
 
 # checks
 c_es = Check.create(
@@ -61,7 +61,7 @@ c_i2 = Check.create(
   condition_aggregator: 'influxdb_basic_all',
   condition_value: 90.0,
   index: 'telegraf',
-  severity: 'warning',
+  severity: 'critical',
   interval: 60,
   team: t_users,
   datasource: d2,
@@ -73,7 +73,7 @@ c_i3 = Check.create(
   condition_query: 'SELECT percentile("usage_idle", 95) FROM "cpu" WHERE "cpu" = \'cpu-total\' AND time > now() - 5m GROUP BY "host"',
   condition_operator: 'lowerThan',
   condition_aggregator: 'influxdb_basic_distinct',
-  condition_value: 50.0,
+  condition_value: 90.0,
   index: 'telegraf',
   severity: 'warning',
   interval: 60,
@@ -83,11 +83,25 @@ c_i3 = Check.create(
 )
 c_i4 = Check.create(
   category: 'system',
-  name: 'mem_below_40%',
+  name: 'mem_below_10%_distinct',
   condition_query: 'SELECT percentile("available_percent", 95) FROM "mem" WHERE time > now() - 5m GROUP BY "host"',
   condition_operator: 'lowerThan',
   condition_aggregator: 'influxdb_basic_distinct',
-  condition_value: 40.0,
+  condition_value: 10.0,
+  index: 'telegraf',
+  severity: 'critical',
+  interval: 60,
+  team: t_users,
+  datasource: d2,
+  documentation_url: 'http://www.google.de'
+)
+c_i5 = Check.create(
+  category: 'application',
+  name: 'api_response_above_200ms_distinct',
+  condition_query: 'SELECT percentile("response_time", 95) FROM "http_response" WHERE time > now() - 5m GROUP BY "host", "server"',
+  condition_operator: 'greaterThan',
+  condition_aggregator: 'influxdb_basic_distinct',
+  condition_value: 0.200,
   index: 'telegraf',
   severity: 'critical',
   interval: 60,

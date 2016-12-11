@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161210181232) do
+ActiveRecord::Schema.define(version: 20161211125457) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 20161210181232) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "message"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "message",    limit: 65535
     t.integer  "kind"
     t.integer  "severity"
     t.integer  "team_id"
@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 20161210181232) do
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email"
-    t.string   "password"
     t.string   "firstname"
     t.string   "lastname"
     t.datetime "created_at",      null: false
