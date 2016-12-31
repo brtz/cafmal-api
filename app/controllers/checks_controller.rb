@@ -1,3 +1,6 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 class ChecksController < SecuredController
   before_action :set_check, only: [:show, :update, :destroy]
 
@@ -47,13 +50,14 @@ class ChecksController < SecuredController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_check
-      @check = Check.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def check_params
-      params.require(:check).permit(:category, :name, :condition_query, :condition_operator, :condition_aggregator, :condition_value, :severity, :interval, :is_locked, :last_ran_at, :team_id, :datasource_id, :documentation_url, :index)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_check
+    @check = Check.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def check_params
+    params.require(:check).permit(:category, :name, :condition_query, :condition_operator, :condition_aggregator, :condition_value, :severity, :interval, :is_locked, :last_ran_at, :team_id, :datasource_id, :documentation_url, :index)
+  end
 end

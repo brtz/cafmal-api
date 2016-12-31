@@ -1,9 +1,12 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 require 'digest'
 
 class User < ApplicationRecord
   has_secure_password
 
-  scope :limited_by_team, ->(team_id) { where("team_id = ?",  team_id) }
+  scope :limited_by_team, ->(team_id) { where('team_id = ?', team_id) }
 
   enum role: [:admin, :lead, :user, :worker, :alerter]
   belongs_to :team
@@ -15,34 +18,34 @@ class User < ApplicationRecord
   validates :role, presence: true
 
   def admin?
-    self.role == "admin"
+    role == 'admin'
   end
 
   def lead?
-    self.role == "lead"
+    role == 'lead'
   end
 
   def user?
-    self.role == "user"
+    role == 'user'
   end
 
   def worker?
-    self.role == "worker"
+    role == 'worker'
   end
 
   def alerter?
-    self.role == "alerter"
+    role == 'alerter'
   end
 
   def to_token_payload
     payload = {}
-    payload['sub'] = self.id
-    payload['role'] = self.role
-    payload['firstname'] = self.firstname
-    payload['lastname'] = self.lastname
-    payload['email'] = self.email
-    payload['team_id'] = self.team_id
-    payload['hash'] = Digest::SHA256.base64digest self.updated_at.to_s
-    return payload
+    payload['sub'] = id
+    payload['role'] = role
+    payload['firstname'] = firstname
+    payload['lastname'] = lastname
+    payload['email'] = email
+    payload['team_id'] = team_id
+    payload['hash'] = Digest::SHA256.base64digest updated_at.to_s
+    payload
   end
 end

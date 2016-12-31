@@ -1,3 +1,6 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 class EventsController < SecuredController
   before_action :set_event, only: [:show, :update, :destroy]
 
@@ -18,9 +21,9 @@ class EventsController < SecuredController
       query_duration = Time.now.utc - (event_params_filter[:age].to_i - event_params_filter[:duration].to_i)
 
       if current_user.admin?
-        @events = Event.where("created_at >= ? AND created_at <= ?", query_age, query_duration)
+        @events = Event.where('created_at >= ? AND created_at <= ?', query_age, query_duration)
       else
-        @events = Event.where("created_at >= ? AND created_at <= ? AND team_id = ?", query_age, query_duration, current_user.team_id)
+        @events = Event.where('created_at >= ? AND created_at <= ? AND team_id = ?', query_age, query_duration, current_user.team_id)
       end
 
     end
@@ -63,17 +66,18 @@ class EventsController < SecuredController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def event_params
-      params.require(:event).permit(:name, :message, :kind, :severity, :team_id, :metric)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def event_params_filter
-      params.require(:query).permit(:age, :duration)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def event_params
+    params.require(:event).permit(:name, :message, :kind, :severity, :team_id, :metric)
+  end
+
+  def event_params_filter
+    params.require(:query).permit(:age, :duration)
+  end
 end

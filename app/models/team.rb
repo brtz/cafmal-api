@@ -1,3 +1,6 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 class Team < ApplicationRecord
   has_many :users
   has_many :checks

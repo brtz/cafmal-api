@@ -1,16 +1,19 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 require_relative 'boot'
 
-require "rails"
+require 'rails'
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "action_cable/engine"
-# require "sprockets/railtie"
-require "rails/test_unit/railtie"
+require 'active_model/railtie'
+require 'active_job/railtie'
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'action_cable/engine'
+# require 'sprockets/railtie'
+require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -29,12 +32,15 @@ module CafmalApi
     config.time_zone = 'UTC'
     config.active_record.default_timezone = :utc
 
+    redis_port = ENV['CAFMAL-API_CACHE_PORT'] || 6379
+    redis_db = ENV['CAFMAL-API_CACHE_DB'] || 0
+
     config.cache_store = :redis_store, {
-      host: "redis" || ENV["CAFMAL-API_CACHE_HOST"],
-      port: 6379 || ENV["CAFMAL-API_CACHE_PORT"].to_i,
-      db: 0 || ENV["CAFMAL-API_CACHE_DB"].to_i,
-      password: "foobar" || ENV["CAFMAL-API_CACHE_PASSWORD"],
-      namespace: "cache"
+      host: ENV['CAFMAL-API_CACHE_HOST'] || 'redis',
+      port: redis_port.to_i,
+      db: redis_db.to_i,
+      password: ENV['CAFMAL-API_CACHE_PASSWORD'] || 'foobar',
+      namespace: 'cache'
     }
 
     config.middleware.use Rack::Attack

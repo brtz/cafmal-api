@@ -1,3 +1,6 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 class AlertsController < SecuredController
   before_action :set_alert, only: [:show, :update, :destroy]
 
@@ -47,13 +50,14 @@ class AlertsController < SecuredController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_alert
-      @alert = Alert.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def alert_params
-      params.require(:alert).permit(:cooldown, :alert_method, :alert_target, :is_enabled, :minimum_severity, :team_id, :is_silenced, :pattern)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_alert
+    @alert = Alert.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def alert_params
+    params.require(:alert).permit(:cooldown, :alert_method, :alert_target, :is_enabled, :minimum_severity, :team_id, :is_silenced, :pattern)
+  end
 end

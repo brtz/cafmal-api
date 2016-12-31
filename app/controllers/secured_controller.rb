@@ -1,8 +1,11 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 class SecuredController < ApplicationController
   before_action :authenticate_user
 
   def new
-    classname = "#{params[:controller]}".singularize.camelize.constantize
+    classname = params[:controller].to_s.singularize.camelize.constantize
 
     fields = {}
     classname.attribute_names.map.each do |name|

@@ -1,3 +1,6 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+
 class WorkersController < SecuredController
   before_action :set_worker, only: [:show, :update, :destroy]
 
@@ -44,13 +47,14 @@ class WorkersController < SecuredController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_worker
-      @worker = Worker.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def worker_params
-      params.require(:worker).permit(:uuid, :supported_sourcetype, :heartbeat_received_at)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_worker
+    @worker = Worker.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def worker_params
+    params.require(:worker).permit(:uuid, :supported_sourcetype, :heartbeat_received_at)
+  end
 end
