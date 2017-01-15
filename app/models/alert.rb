@@ -11,7 +11,6 @@ class Alert < ApplicationRecord
   validates :cooldown, presence: true
   validates :alert_method, presence: true
   validates :alert_target, presence: true
-  validates :is_enabled, presence: true
   validates :minimum_severity, presence: true
   validates :pattern, length: { minimum: 1 }
 end

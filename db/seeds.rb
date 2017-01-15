@@ -109,3 +109,15 @@ c_i5 = Check.create(
   datasource: d2,
   documentation_url: 'http://www.google.de'
 )
+
+# alerts
+a_1 = Alert.create(
+  alert_method: 'webhook',
+  alert_target: 'https://lurkerden.no-ip.org',
+  cooldown: 10,
+  pattern: 'system.*',
+  minimum_severity: 'critical',
+  is_enabled: true,
+  is_silenced: false,
+  team: t_users
+)

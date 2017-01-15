@@ -43,7 +43,7 @@ class WorkersController < SecuredController
   # DELETE /workers/1
   def destroy
     authorize! :destroy, @worker
-    @worker.update_attributes(deleted_at: Time.now, uuid: 'deleted-' + @worker.uuid)
+    @worker.update_attributes(deleted_at: Time.now, uuid: "deleted-#{@worker.id}-#{@worker.uuid}")
   end
 
   private

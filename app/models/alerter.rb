@@ -3,4 +3,5 @@
 
 class Alerter < ApplicationRecord
   validates :uuid, uniqueness: true
+  validates :uuid, presence: true
 end
