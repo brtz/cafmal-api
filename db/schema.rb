@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211125457) do
+ActiveRecord::Schema.define(version: 20170115111944) do
 
   create_table "alerters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
@@ -44,9 +44,8 @@ ActiveRecord::Schema.define(version: 20161211125457) do
     t.integer  "severity"
     t.integer  "interval"
     t.boolean  "is_locked"
-    t.datetime "last_ran_at",                        default: '2016-11-29 23:34:42'
-    t.datetime "created_at",                                                         null: false
-    t.datetime "updated_at",                                                         null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.integer  "team_id"
     t.integer  "datasource_id"
     t.datetime "deleted_at"

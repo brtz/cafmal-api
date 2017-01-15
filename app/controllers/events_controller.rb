@@ -10,7 +10,7 @@ class EventsController < SecuredController
 
     if params[:query].nil?
 
-      if current_user.admin?
+      if current_user.admin? || current_user.alerter?
         @events = Event.limited_by_age
       else
         @events = Event.limited_by_team(current_user.team_id).limited_by_age
@@ -20,7 +20,7 @@ class EventsController < SecuredController
       query_age = Time.now.utc - event_params_filter[:age].to_i
       query_duration = Time.now.utc - (event_params_filter[:age].to_i - event_params_filter[:duration].to_i)
 
-      if current_user.admin?
+      if current_user.admin? || current_user.alerter?
         @events = Event.where('created_at >= ? AND created_at <= ?', query_age, query_duration)
       else
         @events = Event.where('created_at >= ? AND created_at <= ? AND team_id = ?', query_age, query_duration, current_user.team_id)

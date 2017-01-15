@@ -6,7 +6,7 @@ class AlertsController < SecuredController
 
   # GET /alerts
   def index
-    if current_user.admin?
+    if current_user.admin? || current_user.alerter?
       @alerts = Alert.all
     else
       @alerts = Alert.limited_by_team(current_user.team_id)
