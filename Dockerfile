@@ -11,7 +11,8 @@ RUN set -x \
     && adduser -u 82 -D -S -G www-data www-data
 
 # unfortunately we need native extensions, so compilers
-RUN apk add --update build-base linux-headers mariadb-dev ruby-dev
+RUN apk add --update build-base ca-certificates linux-headers mariadb-dev ruby-dev tini
+RUN update-ca-certificates
 
 ADD Gemfile $APP_HOME/
 ADD Gemfile.lock $APP_HOME/
@@ -27,4 +28,5 @@ RUN chown -R www-data:www-data tmp/ log/ Gemfile.lock
 
 USER www-data
 
-CMD ["unicorn"]
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["unicorn", "-c", "./config/unicorn.rb"]

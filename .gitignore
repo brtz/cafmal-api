@@ -43,3 +43,5 @@ bower.json
 
 # rbenv
 .ruby-version
+
+.idea
