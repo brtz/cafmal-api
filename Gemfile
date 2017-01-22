@@ -20,6 +20,7 @@ gem 'unicorn-worker-killer', '~> 0.4'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'listen', '~> 3.0.5'
+  gem 'request-log-analyzer'
   gem 'rubocop'
   gem 'yard'
 end

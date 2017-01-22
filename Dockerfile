@@ -24,7 +24,7 @@ RUN apk del --purge build-base linux-headers ruby-dev
 ADD . $APP_HOME
 
 # chown files for www-data write access. unicorn needs Gemfile.lock
-RUN chown -R www-data:www-data tmp/ log/ Gemfile.lock
+RUN chown -R www-data:www-data Gemfile.lock log/ public/ tmp/
 
 USER www-data
 

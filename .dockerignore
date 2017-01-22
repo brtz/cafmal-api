@@ -1,9 +1,12 @@
 .dockerignore
+doc/
 Dockerfile
 docker-compose.yml
-log/*.log
-doc/
-.rubocop.yml
-test/
+.git
+.gitignore
 .idea/
-
+log/*.log
+.rubocop.yml
+.ruby-version
+start_dev.sh
+test/
