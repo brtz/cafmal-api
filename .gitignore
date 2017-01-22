@@ -16,8 +16,6 @@ rerun.txt
 pickle-email-*.html
 Gemfile.lock
 
-# dotenv
-# TODO Comment out this rule if environment variables can be committed
 .env
 
 ## Environment normalization:

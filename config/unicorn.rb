@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 # config/unicorn.rb
-worker_processes Integer(ENV['SOMBRA_UNICORN_CONCURRENCY'] || 3)
+worker_processes Integer(ENV['CAFMAL-API_UNICORN_CONCURRENCY'] || 3)
 timeout 15
 preload_app true
 

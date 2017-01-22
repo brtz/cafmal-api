@@ -18,11 +18,7 @@ gem 'unicorn', '~> 5.2'
 gem 'unicorn-worker-killer', '~> 0.4'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-end
-
-group :development do
   gem 'listen', '~> 3.0.5'
   gem 'rubocop'
   gem 'yard'
