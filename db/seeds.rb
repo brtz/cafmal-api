@@ -114,7 +114,7 @@ c_i5 = Check.create(
 a_1 = Alert.create(
   alert_method: 'webhook',
   alert_target: 'https://lurkerden.no-ip.org',
-  cooldown: 10,
+  cooldown: 60,
   pattern: 'system.*',
   minimum_severity: 'critical',
   is_enabled: true,

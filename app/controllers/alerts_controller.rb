@@ -58,6 +58,7 @@ class AlertsController < SecuredController
 
   # Only allow a trusted parameter "white list" through.
   def alert_params
-    params.require(:alert).permit(:cooldown, :alert_method, :alert_target, :is_enabled, :minimum_severity, :team_id, :is_silenced, :pattern)
+    # we explicitly allow updated_at here, as alerters need to be able to modify it
+    params.require(:alert).permit(:cooldown, :alert_method, :alert_target, :is_enabled, :minimum_severity, :team_id, :is_silenced, :pattern, :updated_at)
   end
 end

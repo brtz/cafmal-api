@@ -55,7 +55,7 @@ class AccessPolicy
     end
 
     role :alerter, proc { |user| user.alerter? } do
-      can :read, Alert
+      can [:read, :update], Alert
       can :manage, Alerter
       can [:read, :create, :update], Event
       can :read, Team
