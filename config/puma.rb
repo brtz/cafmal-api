@@ -9,6 +9,10 @@ threads threads_min.to_i, threads_max.to_i
 workers workers_max.to_i
 preload_app!
 
+on_worker_boot do
+   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+end
+
 before_fork do
   require 'puma_worker_killer'
 
